@@ -1,0 +1,20 @@
+pc = '🖥'
+new = ''
+heart = '♥'
+phone = '📱'
+school = '🏫'
+warning = '⚠️'
+check = '✅'
+delete = '🗑'
+message_out = '📨'
+refresh = '🔄'
+
+thumbs_up = '👍'
+
+circle_green = '🟢'
+circle_red = '🔴'
+circle_orange = '🟠'
+
+person = '👤'
+thinking = '🤔'
+dont_know = '🤷‍♂'
