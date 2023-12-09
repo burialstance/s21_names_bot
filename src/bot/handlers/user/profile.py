@@ -51,6 +51,7 @@ async def on_profile(message: types.Message, profile: Profile):
 
 @router.callback_query(ProfileCallback.filter(F.action == ProfileAction.BACK_TO_PROFILE))
 async def process_back_to_profile(callback: types.CallbackQuery, state: FSMContext, profile: Profile):
+    await callback.answer()
     await state.clear()
     await show_profile(callback.message, profile, edit=True)
 
