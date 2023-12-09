@@ -1,6 +1,9 @@
 from pathlib import Path
+
+import humanize
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+humanize.i18n.activate("ru_RU")
 
 _BASE_DIR = Path(__file__).parent.parent
 _ENV_FILE = _BASE_DIR.parent.joinpath('.env')

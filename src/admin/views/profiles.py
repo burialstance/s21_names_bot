@@ -15,6 +15,7 @@ class ProfileView(ModelView):
         fields.HasOne('school_user', identity='school_users'),
         fields.StringField('created_at_humanize'),
         fields.StringField('updated_at_humanize'),
+        fields.StringField('last_activity_humanize'),
     ]
 
     exclude_fields_from_create = [

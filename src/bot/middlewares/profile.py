@@ -25,6 +25,9 @@ class ProfileMiddleware(BaseMiddleware):
         profile: Profile
         data[self.kwargs_key] = profile = await profile_service.get_or_none_by_telegram_user_id(event.from_user.id)
 
+        if profile:
+            await profile_service.set_activity(profile)
+
         if profile is None and self.required:
             if isinstance(event, Message):
                 return await event.answer(
@@ -36,5 +39,4 @@ class ProfileMiddleware(BaseMiddleware):
                     ErrorPage(title=self.required_profile_text).build_text(disable_decoration=True),
                     show_alert=True
                 )
-
         return await handler(event, data)

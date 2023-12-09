@@ -25,6 +25,11 @@ class ProfilePage(BasePage):
                     html_decoration.bold('telegram username:'),
                     f'@{profile.telegram_user.username}'
                 ])
+            ]),
+            desc=' '.join([
+                'Последняя активность',
+                profile.last_activity_humanize,
+                'назад'
             ])
         )
 

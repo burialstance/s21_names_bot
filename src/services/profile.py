@@ -1,6 +1,7 @@
 from typing import Optional
 
 from tortoise.expressions import Q
+from tortoise.timezone import now
 from tortoise.transactions import in_transaction
 
 # from tortoise import Q
@@ -40,3 +41,8 @@ async def delete_cascade(profile: Profile) -> bool:
         await profile.school_user.delete(using_db=connection)
         await profile.delete(using_db=connection)
         return True
+
+
+async def set_activity(profile: Profile) -> Profile:
+    await profile.update_from_dict({'last_activity': now()}).save()
+    return profile

@@ -1,7 +1,9 @@
 import datetime
 from typing import Optional
 
+import humanize
 from tortoise import fields
+from tortoise.timezone import now
 
 from pydantic import BaseModel
 
@@ -11,6 +13,8 @@ from src.models.school import SchoolUserCreate, SchoolUser, SchoolUserRetrieve
 
 
 class Profile(mixins.Timestamped, mixins.Model):
+    last_activity: datetime.datetime = fields.DatetimeField(auto_now_add=True)
+
     telegram_user: fields.OneToOneRelation['TelegramUser'] = fields.OneToOneField(
         'models.TelegramUser', 'profile', fields.CASCADE
     )
@@ -20,6 +24,10 @@ class Profile(mixins.Timestamped, mixins.Model):
 
     class Meta:
         table = 'profile'
+
+    @property
+    def last_activity_humanize(self) -> str:
+        return humanize.naturaldelta(now() - self.last_activity)
 
 
 class ProfileCreate(BaseModel):
