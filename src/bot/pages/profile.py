@@ -29,7 +29,6 @@ class ProfilePage(BasePage):
             desc=' '.join([
                 'Последняя активность',
                 profile.last_activity_humanize,
-                'назад'
             ])
         )
 
