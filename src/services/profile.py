@@ -46,3 +46,19 @@ async def delete_cascade(profile: Profile) -> bool:
 async def set_activity(profile: Profile) -> Profile:
     await profile.update_from_dict({'last_activity': now()}).save()
     return profile
+
+
+async def get_total_support_messages_count(profile: Profile, unseen_only: bool = False) -> int:
+    qs = profile.mails.all()
+    if unseen_only:
+        qs = qs.filter(answer=None)
+    return await qs.count()
+
+
+async def get_mails(profile: Profile, offset: int = 0, limit: int = 0, unseen_only: bool = False) -> list['Mail']:
+    qs = profile.mails.all()
+
+    if unseen_only:
+        qs = qs.filter(answer=None)
+
+    return await qs.offset(offset).limit(limit)

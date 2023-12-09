@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional, List
 
 import humanize
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -16,7 +17,6 @@ class Settings(BaseSettings):
     APP_VERSION: str = '0.0.1'
 
     TELEGRAM_BOT_TOKEN: str
-
     DATABASE_URI: str = f'sqlite://{BASE_DIR.parent}/db.sqlite'
 
     model_config = SettingsConfigDict(env_file=_ENV_FILE, extra='ignore')

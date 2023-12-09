@@ -1,5 +1,5 @@
 import asyncio
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 
 from aiocache import cached, caches, SimpleMemoryCache
 from tortoise.exceptions import DoesNotExist
@@ -103,3 +103,7 @@ async def get_or_create(user_in: TelegramUserCreate) -> Tuple[TelegramUser, bool
 async def set_username(user: TelegramUser, username: str) -> TelegramUser:
     await user.update_from_dict({'username': username}).save()
     return user
+
+
+async def get_admins() -> List[TelegramUser]:
+    return await TelegramUser.all().filter(is_superuser=True)

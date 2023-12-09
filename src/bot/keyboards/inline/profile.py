@@ -65,6 +65,7 @@ def build_delete_profile_kb() -> InlineKeyboardMarkup:
 def build_approve_delete_profile_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardBuilder()
     kb.add(approve_delete_profile_btn)
+    kb.add(back_to_profile_btn)
     return kb.adjust(1).as_markup()
 
 

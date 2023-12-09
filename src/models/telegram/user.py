@@ -10,6 +10,7 @@ from src.db import mixins
 
 class TelegramUser(mixins.Timestamped, mixins.Model):
     username: str = fields.CharField(64, unique=True)
+    is_superuser: bool = fields.BooleanField(default=False)
 
     profile: fields.OneToOneRelation['Profile']
 
@@ -33,3 +34,4 @@ class TelegramUserCreate(TelegramUserBase):
 class TelegramUserRetrieve(TelegramUserBase):
     created_at: datetime.datetime
     updated_at: Optional[datetime.datetime]
+    is_superuser: bool

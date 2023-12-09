@@ -13,6 +13,7 @@ class TelegramUserView(ModelView):
         fields.IntegerField('id'),
         fields.StringField('username'),
         fields.HasOne('profile', identity='profiles'),
+        fields.BooleanField('is_superuser'),
         fields.StringField('created_at_humanize'),
         fields.StringField('updated_at_humanize'),
     ]
@@ -21,7 +22,9 @@ class TelegramUserView(ModelView):
         'created_at_humanize',
         'updated_at_humanize'
     ]
-    exclude_fields_from_edit = exclude_fields_from_create
+    exclude_fields_from_edit = exclude_fields_from_create + [
+        'profile'
+    ]
 
     def get_queryset(self):
         return self.model.all().prefetch_related('profile')

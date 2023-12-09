@@ -31,6 +31,7 @@ TORTOISE_CONFIG = {
                 'src.models.telegram',
                 'src.models.school',
                 'src.models.profile',
+                'src.models.support'
             ],
         },
 

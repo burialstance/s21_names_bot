@@ -1,22 +1,21 @@
-from starlette.requests import Request
 from starlette_admin import fields
 
 from src.admin.contrib.tortoise import ModelView, Admin
 from src.admin import icons
-from src.models.profile import Profile
+from src.models.support import Mail
 
 
-class ProfileView(ModelView):
-    model = Profile
-    identity = 'profiles'
+class MailView(ModelView):
+    model = Mail
+    identity = 'mails'
 
     fields = [
         fields.IntegerField('id'),
-        fields.HasOne('telegram_user', identity='telegram_users'),
-        fields.HasOne('school_user', identity='school_users'),
+        fields.StringField('text'),
+        fields.StringField('answer'),
+        fields.HasOne('profile', identity='profiles'),
         fields.StringField('created_at_humanize'),
         fields.StringField('updated_at_humanize'),
-        fields.StringField('last_activity_humanize'),
     ]
 
     exclude_fields_from_create = [
@@ -26,8 +25,8 @@ class ProfileView(ModelView):
     exclude_fields_from_edit = exclude_fields_from_create
 
     def get_queryset(self):
-        return self.model.all().prefetch_related('telegram_user', 'school_user')
+        return self.model.all().prefetch_related('profile')
 
 
 def register(admin: Admin):
-    admin.add_view(ProfileView(icon=icons.CARD))
+    admin.add_view(MailView(icon=icons.MAIL))

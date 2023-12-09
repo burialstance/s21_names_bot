@@ -9,10 +9,12 @@ START_CMD = 'start'
 PROFILE_CMD = 'profile'
 HELP_CMD = 'help'
 DELETE_CMD = 'delete'
+SUPPORT_CMD = 'support'
 
 BOT_COMMANDS = {
     PROFILE_CMD: ' '.join(filter(None, [icons.person, 'Мой профиль'])),
     DELETE_CMD: ' '.join(filter(None, [icons.delete, 'Удалить мой профиль'])),
+    SUPPORT_CMD: ' '.join(filter(None, [icons.message, 'Напиши нам'])),
     HELP_CMD: ' '.join(filter(None, ['Помочь?'])),
 }
 

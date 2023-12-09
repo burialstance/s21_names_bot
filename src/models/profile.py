@@ -22,6 +22,8 @@ class Profile(mixins.Timestamped, mixins.Model):
         'models.SchoolUser', 'profile', fields.CASCADE
     )
 
+    mails: fields.ReverseRelation['Mail']
+
     class Meta:
         table = 'profile'
 

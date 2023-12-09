@@ -3,6 +3,7 @@ from pydantic import ConfigDict
 
 from src.models.profile import Profile
 from .base import BasePage
+from ..misc import icons
 
 
 class ProfilePage(BasePage):
@@ -15,6 +16,7 @@ class ProfilePage(BasePage):
         await profile.fetch_related('school_user', 'telegram_user')
         return ProfilePage(
             profile=profile,
+            icon=icons.person,
             title='Профиль пользователя',
             content='\n'.join([
                 ' '.join([

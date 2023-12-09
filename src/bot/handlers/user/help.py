@@ -11,6 +11,6 @@ router = Router()
 async def on_help(message: types.Message):
     text = random.choice([
         'Видишь эта крутится? - крути эту, что не крутится - не крути',
-        'Напиши ченить - не укушу'
+        'Преисполнись и все станет просто'
     ])
     await message.answer(text=text)

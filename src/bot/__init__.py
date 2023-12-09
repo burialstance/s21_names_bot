@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from .bot import dp, bot
+from .main import dp, bot
 
 
 def register_bot_app(app: FastAPI):
