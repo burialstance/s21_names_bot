@@ -98,3 +98,8 @@ async def get_or_create(user_in: TelegramUserCreate) -> Tuple[TelegramUser, bool
         return await get_by_username(user_in.username), False
     except DoesNotExist:
         return await create(user_in), True
+
+
+async def set_username(user: TelegramUser, username: str) -> TelegramUser:
+    await user.update_from_dict({'username': username}).save()
+    return user

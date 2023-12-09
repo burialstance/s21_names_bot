@@ -1,3 +1,6 @@
+import enum
+from typing import List
+
 from aiogram import Bot, types
 
 from src.bot.misc import icons
@@ -8,11 +11,9 @@ HELP_CMD = 'help'
 DELETE_CMD = 'delete'
 
 BOT_COMMANDS = {
-    PROFILE_CMD: ' '.join(filter(None, ['Show your profile'])),
-    START_CMD: ' '.join(filter(None, ['Show start message'])),
-    HELP_CMD: ' '.join(filter(None, ['Show help message'])),
-
-    DELETE_CMD: ' '.join(filter(None, [icons.delete, 'Delete my accounts'])),
+    PROFILE_CMD: ' '.join(filter(None, [icons.person, 'Мой профиль'])),
+    DELETE_CMD: ' '.join(filter(None, [icons.delete, 'Удалить мой профиль'])),
+    HELP_CMD: ' '.join(filter(None, ['Помочь?'])),
 }
 
 

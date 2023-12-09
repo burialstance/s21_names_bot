@@ -4,6 +4,7 @@ from aiogram import Router
 from src.bot.filters.query import QueryFilter
 from src.bot.middlewares.profile import ProfileMiddleware
 from src.bot.misc import icons
+from src.bot.pages.base import BasePage
 
 from src.services import profile as profile_service
 
@@ -19,4 +20,4 @@ async def on_query(message: types.Message):
         profile_page = await ProfilePage.create(profile)
         await message.answer(profile_page.build_public_text())
     else:
-        await message.answer(' '.join([icons.dont_know, 'Ничего не нашел']))
+        await message.answer(BasePage(icon=icons.dont_know, title='Ничего не нашел').build_text())

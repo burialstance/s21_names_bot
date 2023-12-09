@@ -25,3 +25,8 @@ async def get_or_create(user_in: SchoolUserCreate) -> Tuple[SchoolUser, bool]:
         return await get_by_username(user_in.username), False
     except DoesNotExist:
         return await create(user_in), True
+
+
+async def set_username(user: SchoolUser, username: str) -> SchoolUser:
+    await user.update_from_dict({'username': username}).save()
+    return user
