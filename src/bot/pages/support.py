@@ -1,3 +1,4 @@
+import textwrap
 from typing import Optional
 
 from src.bot.misc import icons
