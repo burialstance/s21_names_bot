@@ -108,12 +108,19 @@ async def process_update_profile_school_username(message: types.Message, state: 
             ).build_text()
         )
 
-    await state.clear()
+    if profile_exist := await profile_service.get_or_none_by_school_username(school_user.username):
+        if profile_exist != profile:
+            await profile_exist.fetch_related('telegram_user')
+            return await message.answer(ErrorPage(
+                title='Этот логин уже использует другой пользователь',
+                content=f'Свяжись с @{profile_exist.telegram_user.username}.'
+            ).build_text())
 
+    await state.clear()
     await profile.fetch_related('school_user')
     try:
         await school_user_service.set_username(profile.school_user, school_user.username)
-        await on_profile(message, profile)
+        await show_profile(message, profile, edit=False)
     except Exception:
         await message.answer(ErrorPage(title='Не удалось изменить логин', desc='сори у меня лапки))').build_text())
         raise
@@ -168,12 +175,20 @@ async def process_update_profile_telegram_username(message: types.Message, state
             ).build_text()
         )
 
-    await state.clear()
+    if profile_exist := await profile_service.get_or_none_by_school_username(telegram_user.username):
+        if profile_exist != profile:
+            return await message.answer(
+                ErrorPage(
+                    title='Этот логин уже использует другой пользователь',
+                    content=f'Свяжись с @{profile_exist.telegram_user.username}.'
+                ).build_text()
+            )
 
+    await state.clear()
     await profile.fetch_related('telegram_user')
     try:
         await telegram_user_service.set_username(profile.telegram_user, telegram_user.username)
-        await on_profile(message, profile)
+        await show_profile(message, profile)
 
     except Exception as e:
         await message.answer(ErrorPage(

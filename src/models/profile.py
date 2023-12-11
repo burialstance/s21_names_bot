@@ -29,7 +29,10 @@ class Profile(mixins.Timestamped, mixins.Model):
 
     @property
     def last_activity_humanize(self) -> str:
-        return humanize.naturaldelta(now() - self.last_activity)
+        last_seen: str = humanize.naturaldelta(now() - self.last_activity)
+        if not any([i in last_seen.lower() for i in ['только что', 'сегодня', 'вчера']]):
+            return f'{last_seen} назад'
+        return last_seen
 
 
 class ProfileCreate(BaseModel):

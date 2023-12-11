@@ -18,6 +18,6 @@ router.message.outer_middleware.register(ProfileMiddleware(required=True))
 async def on_query(message: types.Message):
     if profile := await profile_service.search_profile(message.text):
         profile_page = await ProfilePage.create(profile)
-        await message.answer(profile_page.build_public_text())
+        await message.answer(profile_page.build_text())
     else:
         await message.answer(BasePage(icon=icons.dont_know, title='Ничего не нашел').build_text())

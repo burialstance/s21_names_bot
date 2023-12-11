@@ -10,7 +10,7 @@ from src.models.profile import Profile, ProfileCreate
 
 
 async def search_profile(q: str) -> Optional[Profile]:
-    q = q.lower()
+    q = q.lstrip('@').lower()
     return await Profile.all().filter(
         Q(telegram_user__username__iexact=q) | Q(school_user__username__iexact=q)
     ).first()
@@ -28,6 +28,10 @@ async def create(profile_in: ProfileCreate) -> Profile:
 
 async def get_or_none_by_telegram_user_id(id: int) -> Optional[Profile]:
     return await Profile.get_or_none(telegram_user_id=id)
+
+
+async def get_or_none_by_telegram_username(username: str) -> Optional[Profile]:
+    return await Profile.get_or_none(telegram_user__username__iexact=username)
 
 
 async def get_or_none_by_school_username(username: str) -> Optional[Profile]:
