@@ -113,6 +113,7 @@ def build_user_support_messages_kb(mails: list[Mail], offset: int = 0, limit: in
                 payload=mail.id
             ).pack()
         ))
+    # TODO add paginate with all mails
 
     kb.add(support_user_back_to_support_btn)
     return kb.adjust(1).as_markup()
